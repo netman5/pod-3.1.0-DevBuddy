@@ -4,10 +4,6 @@
   "name": "Dev Buddy",
   "description": "Bookmark management tool",
   "version": "0.0.1",
-  "chrome_url_overrides": {
-    "newtab": "index.html"
-  },
-
   "browser_action": {
     "default_icon": "logo192.png"
   },
