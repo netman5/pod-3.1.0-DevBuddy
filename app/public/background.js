@@ -1,5 +1,10 @@
 /* global chrome */
 
 chrome.browserAction.onClicked.addListener(function () {
-  chrome.tabs.create({ url: 'chrome://newtab' });
+  chrome.tabs.create(
+    { url: chrome.extension.getURL('index.html') },
+    function (tab) {
+      //Tab opened
+    }
+  );
 });
