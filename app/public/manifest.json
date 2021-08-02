@@ -14,9 +14,23 @@
     "128": "logo192.png"
   },
   "permissions": ["tabs"],
-
+  
   "background": {
     "scripts": ["background.js"],
     "persistent": false
-  }
+  },
+
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "all_frames": true,
+    "js": [
+      "content.js"
+    ]
+  }], 
+
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "web_accessible_resources": [
+    "index.html",
+    "/static/*"
+  ]
 }
