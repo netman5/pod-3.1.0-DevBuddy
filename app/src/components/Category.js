@@ -5,7 +5,14 @@ import AddIcon from '@material-ui/icons/Add';
 import TabModal from './TabModal'
 
 function Category() {
+  const [open, setOpen] = React.useState(false);
 
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
   return (
     <div className={styles.container}>
       <div className={styles.head}>
@@ -16,7 +23,7 @@ function Category() {
       </div>
       {mockData.map((data) => {
         return (
-          <div className={styles.cardContainer} >
+          <div className={styles.cardContainer} key={data.name}>
             <div className={styles.categoryName}>{data.name}</div>
             <div className={styles.groups}>
               {data.groups.map((group) => {
@@ -24,7 +31,7 @@ function Category() {
                 
                 return (
                   
-                  <div className={styles.card}>
+                  <div className={styles.card} key={name} onClick={()=> setOpen(true)}>
                     <h3 className={styles.text}> {name}</h3> 
                     <span className={styles.text}>{tabs.length} Tabs </span>
                   </div>
@@ -34,6 +41,9 @@ function Category() {
           </div>
         );
       })}
+
+    {open && < TabModal closeModal={setOpen}  open={open}/>}
+
     </div>
   );
 }
