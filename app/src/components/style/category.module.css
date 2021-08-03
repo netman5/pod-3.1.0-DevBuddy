@@ -1,0 +1,80 @@
+.container {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.container > .head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: #f1f3f4;
+}
+
+.container > .head h1 {
+  font-weight: 600;
+  font-size: 1.6em;
+}
+.container > .head > .button {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  padding: 8px;
+  background-color: #19d800;
+  color: white;
+  font-weight: 600;
+  font-size: 1em;
+  cursor: pointer;
+  box-shadow: 0px 0px 15px -2px #16c000;
+  transition: 0.3s all;
+}
+
+.container > .head > .button:hover {
+  background-color: #16c000;
+  box-shadow: 0px 0px 20px -2px #16c000;
+}
+
+.container > .cardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 20px 0;
+}
+
+.container > .cardContainer > .categoryName {
+  font-size: 1.4em;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+.container > .cardContainer > .groups {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.container > .cardContainer > .groups > .card {
+  width: 29.33%;
+  margin: 2%;
+  font-size: 3em;
+  padding: 40px 0;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px -9px rgb(88, 88, 88);
+  transition: 00.3s all;
+  min-width: 200px;
+}
+
+.container > .cardContainer > .groups > .card:hover {
+  box-shadow: 0px 0px 15px -7px rgb(88, 88, 88);
+}
+
+.container > .cardContainer > .groups > .card > .num {
+  padding: 0 10px;
+}
+.container > .cardContainer > .groups > .card > .text {
+  font-size: 0.5em;
+}

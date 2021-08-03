@@ -1,0 +1,38 @@
+.container {
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 2px solid rgb(199, 199, 199);
+  box-sizing: border-box;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.container > .logo > .icon {
+  font-size: 9em;
+}
+
+.capture {
+  display: flex;
+  align-items: center;
+}
+
+.capture > .button {
+  margin: 20px;
+  padding: 10px 25px;
+  background-color: #1e90ff;
+  color: white;
+  font-weight: 600;
+  font-size: 1.2em;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.capture > .button:hover {
+  background-color: #0070ff;
+}
