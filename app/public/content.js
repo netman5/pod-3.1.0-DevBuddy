@@ -1,26 +1,12 @@
 /* global chrome */
 
-chrome.tabs.query({windowId: chrome.windows.WINDOW_ID_CURRENT}, (tabs) =>{
+const body = document.getElementsByTagName("body");
 
-    chrome.tabs.sendMessage(
-      tabs[0].id,
-      { greeting: "hello" },
-      function (response) {
-        console.log(response.farewell);
-      }
-    );
-    const ul = document.createElement("ul");
 
-    for (let tab of tabs) {
-      const li = document.createElement("li");
-      li.innerHTML = tab;
-      ul.appendChild(li);
-    }
+const h1 = document.createElement('h1')
+h1.style.fontSize = '18px'
+h1.innerHTML = 'Welcome to our new chrome extension'
 
-    const body = document.getElementById("body");
-    body.append(ul);
+body[0]?.append(h1)
 
-    console.log(ul);
-    console.log(tabs);
-})
-
+console.log(h1)
