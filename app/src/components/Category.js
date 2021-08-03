@@ -18,10 +18,12 @@ function Category() {
             <div className={styles.categoryName}>{data.name}</div>
             <div className={styles.groups}>
               {data.groups.map((group) => {
+                const {name, tabs} = group
+                
                 return (
                   <div className={styles.card}>
-                    <span className={styles.num}>{group.tabs.length}</span>
-                    <span className={styles.text}> Tabs</span>
+                    <span className={styles.text}> {name}</span> 
+                    <span className={styles.num}>{tabs.length} Bookmarked</span>
                   </div>
                 );
               })}

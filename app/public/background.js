@@ -9,15 +9,7 @@ chrome.browserAction.onClicked.addListener(function () {
   );
 });
 
-// async function getCurrentTab() {
-//   let queryOptions = { active: true, currentWindow: true };
-//   let [tab] = await chrome.tabs.query(queryOptions);
-//   console.log(tab)
-//   return tab
-// }
-
-// getCurrentTab()
-
+// captures all current window tabs
 chrome.tabs.query({windowId: chrome.windows.WINDOW_ID_CURRENT}, (tabs) => {
   const arrTabs = [...tabs]
   arrTabs.forEach(tab => {
@@ -26,14 +18,6 @@ chrome.tabs.query({windowId: chrome.windows.WINDOW_ID_CURRENT}, (tabs) => {
   })
 })
 
-
-// const getAllTabs = async () => {
-//   let queryOpts = {currentWindow: true}
-//   let [tabs] = await chrome.tabs.query(queryOpts)
-//   console.log(tabs)
-//   return tabs
-// } 
-// getAllTabs()
 
 
    
