@@ -1,12 +1,12 @@
 import './App.css';
+import Home from './screens/Home';
+import SearchBar from './components/SearchBar';
 
 const App = () => {
   return (
     <div className='App'>
-      <header className='App-header'>
-        <h1>Dev Buddy</h1>
-        <p> A bookmark management chrome extension</p>
-      </header>
+      <SearchBar />
+      <Home />
     </div>
   );
 };
