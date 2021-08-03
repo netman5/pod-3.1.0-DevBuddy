@@ -22,8 +22,8 @@ function Category() {
                 
                 return (
                   <div className={styles.card}>
-                    <span className={styles.text}> {name}</span> 
-                    <span className={styles.num}>{tabs.length} Bookmarked</span>
+                    <h3 className={styles.text}> {name}</h3> 
+                    <span className={styles.text}>{tabs.length} Tabs </span>
                   </div>
                 );
               })}
