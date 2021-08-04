@@ -7,12 +7,6 @@ import TabModal from './TabModal'
 function Category() {
   const [open, setOpen] = React.useState(false);
 
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
   return (
     <div className={styles.container}>
       <div className={styles.head}>
