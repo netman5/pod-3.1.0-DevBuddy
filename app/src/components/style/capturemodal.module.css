@@ -1,0 +1,95 @@
+.modalContainer {
+  position: fixed;
+  display: flex;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0.3;
+}
+
+.modal {
+  width: 40%;
+  height: 40%;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 30px;
+  align-items: flex-start;
+  box-sizing: border-box;
+}
+
+.ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.tabList {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.tabList > p {
+  margin: 0px;
+}
+
+.tabList > img {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.tabs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.options > select {
+  margin-top: 20px;
+  width: 200px;
+  padding: 10px 20px;
+}
+
+.options > select > option {
+  width: 200px;
+  padding: 10px 20px;
+}
+
+.modal > button {
+  align-self: flex-end;
+  margin: 20px;
+  padding: 10px 25px;
+  background-color: #1e90ff;
+  color: white;
+  font-weight: 600;
+  font-size: 1.2em;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
