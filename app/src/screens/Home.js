@@ -1,43 +1,48 @@
 /* global chrome */
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import BookOutlinedIcon from '@material-ui/icons/BookOutlined';
 import styles from './styles/home.module.css';
 import Category from '../components/Category';
 import CaptureModal from '../components/modals/CaptureModal';
+import mocktabs from '../utils/mocktabs';
+import { useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Home() {
   const [openCaptureModal, setOpenCaptureModal] = useState(false);
-  const [currentTabID, setCurrentTabID] = useState('');
   const [tabs, setTabs] = useState([]);
 
   useEffect(() => {
-    chrome.tabs.query(
-      { currentWindow: true, active: true },
-      function (tabArray) {
-        setCurrentTabID(tabArray[0].id);
-      }
-    );
+    //setTabs(mocktabs);
+    chrome.storage.local.set({ key: undefined }, function () {
+      //console.log('Value is set to ');
+    });
   }, []);
 
-  const toggleCaptureModal = () => {
+  const toggleCaptureModal = (tag = 'default') => {
     chrome.tabs.query(
       { windowId: chrome.windows.WINDOW_ID_CURRENT },
       (tabs) => {
         const arrTabs = [...tabs];
         setTabs(arrTabs);
-        arrTabs.forEach((tab) => {
-          const { url, id, title } = tab;
-          if (currentTabID !== id) {
-            chrome.tabs.remove(id);
-            //console.log(id, url, title);
-            //setTabs([...tabs, tab]);
-          }
-        });
       }
     );
 
     setOpenCaptureModal(!openCaptureModal);
+
+    if (tag === 'success') {
+      toast.success('Successfully saved');
+    }
+  };
+
+  const onRemoveTab = (id) => {
+    setTabs(
+      tabs.filter((tab) => {
+        if (tab.id !== id) return tab;
+      })
+    );
   };
   return (
     <>
@@ -60,7 +65,9 @@ function Home() {
         open={openCaptureModal}
         onClose={toggleCaptureModal}
         tabs={tabs}
+        onRemoveTab={onRemoveTab}
       />
+      <ToastContainer />
     </>
   );
 }
