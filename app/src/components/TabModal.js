@@ -1,49 +1,105 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../components/style/modal.module.css';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import AddIcon from '@material-ui/icons/Add';
 
 function TabModal(props) {
   const { closeModal, data } = props;
-  console.log(data);
+  const [tabsData] = useState(data.tabs);
+  const [tabs, setTabs] = useState([]);
+  const [selectAll, setSelectAll] = useState(false);
+  useEffect(() => {
+    let newTabs = [];
+    tabsData.forEach((item) => {
+      newTabs = [
+        ...newTabs,
+        { title: item.title, url: item.url, state: false },
+      ];
+    });
+    setTabs(newTabs);
+  }, []);
+
+  const handleSelectAll = (event) => {
+    let newTabs = tabs;
+    newTabs.forEach((tab) => (tab.state = event.target.checked));
+    setTabs([...newTabs]);
+    setSelectAll(!selectAll);
+  };
+
+  const handleTabClick = (event, key) => {
+    let newTabs = tabs;
+    newTabs[key]['state'] = event.target.checked;
+    setTabs([...newTabs]);
+  };
+
+  const handleRestore = () => {
+    console.log(tabs);
+  };
+
   return (
     <div className={styles.modalBackground}>
       <div className={styles.modalContainer}>
         <div className={styles.titleCloseBtn}>
-          <button onClick={() => closeModal(false)}> X </button>
+          <button onClick={() => closeModal(false)}>
+            <AddIcon className={styles.closeModalBtn} />
+          </button>
         </div>
         <h1 className={styles.title}>{data.name}</h1>
 
         <div className={styles.body}>
+          <div className={styles.tab}>
+            {/* <input
+              type={'checkbox'}
+              defaultChecked={selectAll}
+              onChange={handleSelectAll}
+              className={styles.tab}
+            /> */}
+            <Checkbox
+              checked={selectAll}
+              onChange={handleSelectAll}
+              className={styles.tab}
+            />
+            <span className={styles.tabName}></span>
+          </div>
           <div className={styles.tabs}>
-            {data.tabs.map((item) => {
+            {tabs.map((tab, index) => {
               return (
-                <div className={styles.tab}>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        // checked={state.checkedB}
-                        // onChange={handleChange}
-                        name='checkedB'
-                        color='primary'
-                      />
-                    }
-                    className={styles.tab}
-                  />
-                  <span className={styles.tabName}>{item.title}</span>
-                </div>
+                <RenderTab
+                  state={tab.state}
+                  handleTabClick={handleTabClick}
+                  key={index}
+                  index={index}
+                  name={tab.title}
+                />
               );
             })}
           </div>
         </div>
         <div className={styles.modalFooter}>
-          <button id={styles.closeBtn} onClick={() => closeModal(false)}>
-            Close
+          <button id={styles.deleteBtn}>Delete</button>
+          <button id={styles.restoreBtn} onClick={handleRestore}>
+            Restore
           </button>
         </div>
       </div>
     </div>
   );
 }
+
+const RenderTab = ({ state, name, handleTabClick, index }) => {
+  return (
+    <div className={styles.tab}>
+      <Checkbox
+        checked={state}
+        onChange={(event) => handleTabClick(event, index)}
+        name={name}
+        color='primary'
+        className={styles.tab}
+      />
+      <span className={styles.tabName}>{name}</span>
+    </div>
+  );
+};
 
 export default TabModal;
