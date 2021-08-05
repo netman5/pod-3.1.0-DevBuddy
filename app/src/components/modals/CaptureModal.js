@@ -1,49 +1,77 @@
-import React from 'react';
+/* global chrome */
+
+import React, { useState } from 'react';
 import styles from '../style/capturemodal.module.css';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'react-feather';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import { createMuiTheme } from '@material-ui/core/styles';
+import Select from '@material-ui/core/Select';
+import { ThemeProvider } from '@material-ui/styles';
 
-const mockTabs = [
-  {
-    id: 1,
-    url: 'http://github.com',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg',
-    name: 'Github',
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#212121',
+    },
   },
-  {
-    id: 2,
-    url: 'http://leetcode.com',
-    img: 'https://repository-images.githubusercontent.com/135522239/b61abe80-7bd4-11e9-8db4-03c18a436041',
-    name: 'Leetcode',
-  },
-  {
-    id: 3,
-    url: 'http://linkedin.com',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png',
-    name: 'Linkedin',
-  },
-  {
-    id: 4,
-    url: 'http://leetcode.com',
-    img: 'https://repository-images.githubusercontent.com/135522239/b61abe80-7bd4-11e9-8db4-03c18a436041',
-    name: 'Leetcode',
-  },
-];
+});
+
+const CategorySelect = () => {
+  const [value, setValue] = useState('');
+
+  return (
+    <ThemeProvider theme={theme}>
+      <FormControl
+        variant='outlined'
+        style={{ margin: '10px', borderColor: '#0000', flex: 1 }}
+      >
+        <InputLabel
+          htmlFor='outlined-age-native-simple'
+          style={{ color: '#000' }}
+        >
+          Select Category
+        </InputLabel>
+        <Select
+          native
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value);
+          }}
+          label='Age'
+          inputProps={{
+            name: 'age',
+            id: 'outlined-age-native-simple',
+          }}
+        >
+          <option aria-label='None' value='' />
+          <option value={10}>Education</option>
+          <option value={20}>Foodies</option>
+          <option value={30}>Entertainment</option>
+        </Select>
+      </FormControl>
+    </ThemeProvider>
+  );
+};
 
 const Tab = ({ tab }) => {
   return (
-    <li>
+    <motion.li
+      className={styles.tabCard}
+      initial={{ scale: 1 }}
+      whileHover={{ scale: 1.03, zIndex: 100, overflowX: 'default' }}
+    >
       <div className={styles.tabList}>
-        <X size={15} style={{ marginRight: '10px' }} />
-        <img
-          src={
-            'https://repository-images.githubusercontent.com/135522239/b61abe80-7bd4-11e9-8db4-03c18a436041'
-          }
-          alt='github'
-        />
-        <a href={tab.url}>{tab.title}</a>
+        <div className={styles.tabTitle}>
+          <img src={'chrome://favicon/size/16@1x/' + tab.url} alt='Error' />
+          <a href={tab.url}>{tab.title}</a>
+        </div>
+        <div className={styles.close}>
+          <X size={15} style={{ marginRight: '10px' }} />
+        </div>
       </div>
-    </li>
+    </motion.li>
   );
 };
 
@@ -62,7 +90,6 @@ const CaptureModal = ({ open, onClose, tabs }) => {
               default: { duration: 0.1 },
             }}
             exit={{ opacity: 0, scale: 0 }}
-            //onClick={onClose}
           >
             <motion.div
               className={styles.modal}
@@ -71,7 +98,7 @@ const CaptureModal = ({ open, onClose, tabs }) => {
               exit={{ opacity: 0, scale: 0 }}
             >
               <div className={styles.header}>
-                <h1>Total: {tabs.length} Tabs</h1>
+                <p>Total : {tabs.length} Tabs</p>
                 <X style={{ cursor: 'pointer' }} onClick={onClose} />
               </div>
 
@@ -81,22 +108,18 @@ const CaptureModal = ({ open, onClose, tabs }) => {
                     return <Tab tab={tab} />;
                   })}
                 </ul>
-                <div className={styles.options}>
-                  <select>
-                    <option>Education</option>
-                    <option>Entertainment</option>
-                    <option>Foodie</option>
-                  </select>
-
-                  <select>
-                    <option>Leetcode</option>
-                    <option>React Docs</option>
-                    <option>Docker Docs</option>
-                  </select>
-                </div>
               </div>
-
-              <button>Capture</button>
+              <div className={styles.options}>
+                <CategorySelect />
+                <CategorySelect />
+              </div>
+              <motion.button
+                initial={{ scale: 1 }}
+                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.1 }}
+              >
+                Capture
+              </motion.button>
             </motion.div>
           </motion.div>
         </AnimatePresence>

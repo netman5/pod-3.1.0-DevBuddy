@@ -1,6 +1,6 @@
 /* global chrome */
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import BookOutlinedIcon from '@material-ui/icons/BookOutlined';
 import styles from './styles/home.module.css';
 import Category from '../components/Category';
@@ -8,17 +8,7 @@ import CaptureModal from '../components/modals/CaptureModal';
 
 function Home() {
   const [openCaptureModal, setOpenCaptureModal] = useState(false);
-  const [currentTabID, setCurrentTabID] = useState('');
   const [tabs, setTabs] = useState([]);
-
-  useEffect(() => {
-    chrome.tabs.query(
-      { currentWindow: true, active: true },
-      function (tabArray) {
-        setCurrentTabID(tabArray[0].id);
-      }
-    );
-  }, []);
 
   const toggleCaptureModal = () => {
     chrome.tabs.query(
@@ -26,14 +16,6 @@ function Home() {
       (tabs) => {
         const arrTabs = [...tabs];
         setTabs(arrTabs);
-        arrTabs.forEach((tab) => {
-          const { url, id, title } = tab;
-          if (currentTabID !== id) {
-            chrome.tabs.remove(id);
-            //console.log(id, url, title);
-            //setTabs([...tabs, tab]);
-          }
-        });
       }
     );
 
