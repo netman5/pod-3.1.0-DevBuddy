@@ -103,6 +103,7 @@
 }
 
 .tab > .tabName {
+  font-size: 1.2em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -116,7 +117,6 @@
   position: absolute;
   top: 20px;
   right: 20px;
-  /* transition: 0.2s all; */
 }
 
 .closeModalBtn:hover {

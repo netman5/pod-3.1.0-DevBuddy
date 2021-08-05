@@ -49,12 +49,6 @@ function TabModal(props) {
 
         <div className={styles.body}>
           <div className={styles.tab}>
-            {/* <input
-              type={'checkbox'}
-              defaultChecked={selectAll}
-              onChange={handleSelectAll}
-              className={styles.tab}
-            /> */}
             <Checkbox
               checked={selectAll}
               onChange={handleSelectAll}
@@ -95,7 +89,6 @@ const RenderTab = ({ state, name, handleTabClick, index }) => {
         onChange={(event) => handleTabClick(event, index)}
         name={name}
         color='primary'
-        className={styles.tab}
       />
       <span className={styles.tabName}>{name}</span>
     </div>
