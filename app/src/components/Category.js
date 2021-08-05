@@ -3,16 +3,19 @@ import mockData from '../utils/mock';
 import styles from './style/category.module.css';
 import AddIcon from '@material-ui/icons/Add';
 import TabModal from './TabModal'
+import AddCategory from './AddCategory'
 
 function Category() {
   const [open, setOpen] = React.useState(false);
+  const [openCat, setOpenCat] = React.useState(false)
 
   return (
     <div className={styles.container}>
       <div className={styles.head}>
         <h1>Categories</h1>
-        <div className={styles.button}>
-          <AddIcon />
+        <div className={styles.button} onClick={() => setOpenCat(true)}>
+          <AddIcon/>
+          {openCat && <AddCategory ModalState={setOpenCat}/>}
         </div>
       </div>
       {mockData.map((data) => {
@@ -35,7 +38,7 @@ function Category() {
           </div>
         );
       })}
-
+    
     {open && < TabModal closeModal={setOpen}  open={open}/>}
 
     </div>
