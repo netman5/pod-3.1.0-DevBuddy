@@ -35,14 +35,19 @@ const Tab = ({ tab }) => {
     <li>
       <div className={styles.tabList}>
         <X size={15} style={{ marginRight: '10px' }} />
-        <img src={tab.img} alt='github' />
-        <a href={tab.url}>{tab.name}</a>
+        <img
+          src={
+            'https://repository-images.githubusercontent.com/135522239/b61abe80-7bd4-11e9-8db4-03c18a436041'
+          }
+          alt='github'
+        />
+        <a href={tab.url}>{tab.title}</a>
       </div>
     </li>
   );
 };
 
-const CaptureModal = ({ open, onClose }) => {
+const CaptureModal = ({ open, onClose, tabs }) => {
   return (
     <motion.div>
       {open && (
@@ -66,13 +71,13 @@ const CaptureModal = ({ open, onClose }) => {
               exit={{ opacity: 0, scale: 0 }}
             >
               <div className={styles.header}>
-                <h1>Total: 4 Tabs</h1>
+                <h1>Total: {tabs.length} Tabs</h1>
                 <X style={{ cursor: 'pointer' }} onClick={onClose} />
               </div>
 
               <div className={styles.tabs}>
                 <ul className={styles.ul}>
-                  {mockTabs.map((tab) => {
+                  {tabs.map((tab) => {
                     return <Tab tab={tab} />;
                   })}
                 </ul>
