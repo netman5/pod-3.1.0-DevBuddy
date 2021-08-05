@@ -13,7 +13,7 @@
     "48": "logo192.png",
     "128": "logo192.png"
   },
-  "permissions": ["tabs", "chrome://favicon/"],
+  "permissions": ["tabs", "chrome://favicon/", "storage"],
 
   "background": {
     "scripts": ["background.js"],
