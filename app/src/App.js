@@ -13,7 +13,7 @@ const App = () => {
   // }, []);
 
   const setGlobal = (data) => {
-    chrome.storage.local.set({ key: mockData }, function () {
+    chrome.storage.local.set({ key: data }, function () {
       console.log('Global Value set', data);
     });
   };

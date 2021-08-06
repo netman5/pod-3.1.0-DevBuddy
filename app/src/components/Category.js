@@ -18,7 +18,9 @@ function Category({ setGlobal }) {
       const res = result.key;
       console.log('Data in Category is :  ');
       console.log(res);
-      setData(res);
+      if (res) {
+        setData(res);
+      }
     });
   }, []);
 
