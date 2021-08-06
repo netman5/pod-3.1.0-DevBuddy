@@ -1,3 +1,5 @@
+/* global chrome */
+
 import React, { useState, useEffect } from 'react';
 import styles from '../components/style/modal.module.css';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -5,7 +7,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import AddIcon from '@material-ui/icons/Add';
 
 function TabModal(props) {
-  const { closeModal, data } = props;
+  const { closeModal, data, catIndex, groupIndex, setGlobal } = props;
   const [tabsData] = useState(data.tabs);
   const [tabs, setTabs] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
@@ -35,6 +37,26 @@ function TabModal(props) {
 
   const handleRestore = () => {
     console.log(tabs);
+    tabs.forEach((tab) => {
+      if (tab.state == true) {
+        chrome.tabs.create({
+          url: tab.url,
+        });
+      }
+    });
+  };
+
+  const handleDelete = () => {
+    chrome.storage.local.get(['key'], function (result) {
+      const res = result.key;
+      tabs.forEach((tab, index) => {
+        if (tab.state == true) {
+          console.log(res[catIndex].groups[groupIndex].tabs[index]);
+          res[catIndex].groups[groupIndex].tabs.splice(index, 1);
+        }
+      });
+      setGlobal(res);
+    });
   };
 
   return (
@@ -71,7 +93,9 @@ function TabModal(props) {
           </div>
         </div>
         <div className={styles.modalFooter}>
-          <button id={styles.deleteBtn}>Delete</button>
+          <button id={styles.deleteBtn} onClick={handleDelete}>
+            Delete
+          </button>
           <button id={styles.restoreBtn} onClick={handleRestore}>
             Restore
           </button>
