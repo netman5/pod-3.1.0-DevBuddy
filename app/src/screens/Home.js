@@ -14,12 +14,12 @@ function Home() {
   const [openCaptureModal, setOpenCaptureModal] = useState(false);
   const [tabs, setTabs] = useState([]);
 
-  useEffect(() => {
-    //setTabs(mocktabs);
-    chrome.storage.local.set({ key: undefined }, function () {
-      //console.log('Value is set to ');
-    });
-  }, []);
+  // useEffect(() => {
+  //   //setTabs(mocktabs);
+  //   chrome.storage.local.set({ key: undefined }, function () {
+  //     //console.log('Value is set to ');
+  //   });
+  // }, []);
 
   const toggleCaptureModal = (tag = 'default') => {
     chrome.tabs.query(

@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import styles from "../components/style/modal.module.css";
 import MockData from "../utils/mock";
+import { Modal } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,21 +16,23 @@ const useStyles = makeStyles((theme) => ({
 
 function AddCategory({ ModalState }) {
   const [category, setCategory] = useState('');
-  const [data, setData] = useState(MockData)
+  const [data, setData] = useState('')
 
   const getCategory = (e) => {
     setCategory(e.target.value)
   };
 
   const handleSubmit = (event) => {
+    event.preventDefault();
     if(category){
-      setData(data)
-      console.log(data)
+      setData(category)
     }
 
-    setCategory('')
     ModalState(false)
-    event.preventDefault()
+
+    
+    
+    
   }
 
 
@@ -41,9 +44,9 @@ function AddCategory({ ModalState }) {
 
   return (
     <div className={styles.modalBackground}>
-      <div className={styles.modalContainer}>
+      <div className={styles.addModalContainer}>
         <div className={styles.titleCloseBtn}>
-          <button onClick={() => ModalState(false)}> X </button>
+          <button onClick={handleClose}> X </button>
         </div>
 
         <div className={styles.title}>
@@ -51,7 +54,7 @@ function AddCategory({ ModalState }) {
         </div>
 
         <div className={styles.body}>
-          <form className={classes.root} noValidate autoComplete="off">
+          <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit} onClick={handleClose}>
             <TextField
               value={category}
               id="outlined-secondary"
@@ -62,10 +65,10 @@ function AddCategory({ ModalState }) {
             />
 
             <div className={styles.modalFooter}>
-              <button id={styles.closeBtn} onClick={handleClose}>
+              <button id={styles.closeBtn}>
                 Close
               </button>
-              <button onSubmit={handleSubmit}>Add</button>
+              <button>Add</button>
             </div>
           </form>
         </div>
