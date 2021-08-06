@@ -16,12 +16,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-feather": "^2.0.9",
-<<<<<<< HEAD
-    "react-scripts": "4.0.3",
-=======
     "react-scripts": "^4.0.3",
     "react-toastify": "^7.0.4",
->>>>>>> 7637411f5616d726171951239bef7f7137f29176
     "typescript": "^4.3.5",
     "web-vitals": "^1.0.1"
   },
