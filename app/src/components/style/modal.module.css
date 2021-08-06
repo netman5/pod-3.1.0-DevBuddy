@@ -1,72 +1,124 @@
 .modalBackground {
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.3);
-    position: fixed;
-    display: flex;
-    top: 0px;
-    left: 0px;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modalContainer {
-    width: 500px;
-    height: 500px;
-    border-radius: 12px;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    display: flex;
-    flex-direction: column;
-    padding: 25px;
-  }
-  
-  .modalContainer .title {
-    display: inline-block;
-    text-align: center;
-    margin-top: 10px;
-  }
-  
-  .titleCloseBtn {
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  .titleCloseBtn button {
-    background-color: transparent;
-    border: none;
-    font-size: 25px;
-    cursor: pointer;
-  }
-  
-  .modalContainer .body {
-    flex: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.7rem;
-    text-align: center;
-  }
-  
-  .modalContainer .modalFooter {
-    flex: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .modalContainer .modalFooter button {
-    width: 150px;
-    height: 45px;
-    margin: 10px;
-    border: none;
-    background-color: cornflowerblue;
-    color: white;
-    border-radius: 8px;
-    font-size: 20px;
-    cursor: pointer;
-  }
-  
-  #closeBtn {
-    background-color: crimson;
-  }
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  display: flex;
+  top: 0px;
+  left: 0px;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContainer {
+  width: 70%;
+  height: 100vw;
+  max-width: 500px;
+  max-height: 500px;
+  min-height: 400px;
+  min-height: 270px;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  position: relative;
+}
+
+.modalContainer .title {
+  display: inline-block;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.titleCloseBtn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.titleCloseBtn button {
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.modalContainer .body {
+  height: 60%;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgb(194, 194, 194);
+  border-radius: 12px;
+  padding: 15px 20px;
+}
+
+.modalContainer .modalFooter {
+  display: flex;
+  padding-top: 20px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContainer .modalFooter button {
+  width: 150px;
+  height: 45px;
+  margin: 10px;
+  border: none;
+  background-color: cornflowerblue;
+  color: white;
+  border-radius: 8px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+#deleteBtn {
+  background-color: crimson;
+  transition: 0.3s all;
+}
+#deleteBtn:hover {
+  box-shadow: 0px 0px 20px -1px crimson;
+}
+
+#restoreBtn {
+  background-color: #16c000;
+  transition: 0.3s all;
+}
+#restoreBtn:hover {
+  box-shadow: 0px 0px 20px -1px #16c000;
+}
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.tab {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.tab > .tabName {
+  font-size: 1.2em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 90%;
+  text-align: justify;
+}
+
+.closeModalBtn {
+  transform: rotate(45deg);
+  font-size: 1.4em !important;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.closeModalBtn:hover {
+  color: crimson;
+}

@@ -10,16 +10,17 @@ import { useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function Home() {
+function Home(props) {
+  const { setGlobal } = props;
   const [openCaptureModal, setOpenCaptureModal] = useState(false);
   const [tabs, setTabs] = useState([]);
 
-  useEffect(() => {
-    //setTabs(mocktabs);
-    chrome.storage.local.set({ key: undefined }, function () {
-      //console.log('Value is set to ');
-    });
-  }, []);
+  // useEffect(() => {
+  //   //setTabs(mocktabs);
+  //   chrome.storage.local.set({ key: undefined }, function () {
+  //     //console.log('Value is set to ');
+  //   });
+  // }, []);
 
   const toggleCaptureModal = (tag = 'default') => {
     chrome.tabs.query(
@@ -59,12 +60,13 @@ function Home() {
             </div>
           </div>
         </div>
-        <Category />
+        <Category setGlobal={setGlobal} />
       </div>
       <CaptureModal
         open={openCaptureModal}
         onClose={toggleCaptureModal}
         tabs={tabs}
+        setGlobal={setGlobal}
         onRemoveTab={onRemoveTab}
       />
       <ToastContainer />

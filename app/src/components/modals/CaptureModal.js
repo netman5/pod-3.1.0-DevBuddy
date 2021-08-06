@@ -115,7 +115,7 @@ const Tab = ({ tab, onRemoveTab }) => {
   );
 };
 
-const CaptureModal = ({ open, onClose, tabs, onRemoveTab }) => {
+const CaptureModal = ({ open, onClose, tabs, onRemoveTab, setGlobal }) => {
   const [category, setCategory] = useState('');
   const [group, setGroup] = useState('');
 
@@ -176,9 +176,10 @@ const CaptureModal = ({ open, onClose, tabs, onRemoveTab }) => {
         }
       }
 
-      chrome.storage.local.set({ key: data }, function () {
-        console.log('Value is set to ' + data);
-      });
+      // chrome.storage.local.set({ key: data }, function () {
+      //   console.log('Value is set to ' + data);
+      // });
+      setGlobal(data);
       console.log(data);
       onClose('success');
     });
