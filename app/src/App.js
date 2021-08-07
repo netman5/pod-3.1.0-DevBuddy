@@ -6,12 +6,6 @@ import SearchBar from './components/SearchBar';
 import mockData from './utils/mock';
 
 const App = () => {
-  // useEffect(() => {
-  //   chrome.storage.local.set({ key: mockData }, function () {
-  //     console.log('Value is set ');
-  //   });
-  // }, []);
-
   const setGlobal = (data) => {
     chrome.storage.local.set({ key: data }, function () {
       console.log('Global Value set', data);
