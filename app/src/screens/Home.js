@@ -15,13 +15,6 @@ function Home(props) {
   const [openCaptureModal, setOpenCaptureModal] = useState(false);
   const [tabs, setTabs] = useState([]);
 
-  // useEffect(() => {
-  //   //setTabs(mocktabs);
-  //   chrome.storage.local.set({ key: undefined }, function () {
-  //     //console.log('Value is set to ');
-  //   });
-  // }, []);
-
   const toggleCaptureModal = (tag = 'default') => {
     chrome.tabs.query(
       { windowId: chrome.windows.WINDOW_ID_CURRENT },
