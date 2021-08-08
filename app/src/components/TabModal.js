@@ -56,6 +56,7 @@ function TabModal(props) {
         }
       });
       setGlobal(res);
+      window.location.reload();
     });
   };
 

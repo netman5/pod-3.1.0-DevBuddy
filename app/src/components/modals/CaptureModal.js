@@ -182,6 +182,7 @@ const CaptureModal = ({ open, onClose, tabs, onRemoveTab, setGlobal }) => {
       setGlobal(data);
       console.log(data);
       onClose('success');
+      window.location.reload();
     });
   };
   return (
