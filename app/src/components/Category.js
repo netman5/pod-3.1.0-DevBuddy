@@ -21,21 +21,21 @@ function Category() {
       {mockData.map((data) => {
         return (
           <div className={styles.cardContainer} key={data.name}>
-            <div className={styles.categoryName}>{data.name}</div>
-            <div className={styles.groups}>
-              {data.groups.map((group) => {
-                const {name, tabs} = group
+          <div className={styles.categoryName}>{data.name}</div>
+          <div className={styles.groups}>
+            {data.groups.map((group) => {
+              const {name, tabs} = group
+              
+              return (
                 
-                return (
-                  
-                  <div className={styles.card} key={name} onClick={()=> setOpen(true)}>
-                    <h3 className={styles.text}> {name}</h3> 
-                    <span className={styles.text}>{tabs.length} Tabs </span>
-                  </div>
-                );
-              })}
-            </div>
+                <div className={styles.card} key={name} onClick={()=> setOpen(true)}>
+                  <h3 className={styles.text}> {name}</h3> 
+                  <span className={styles.text}>{tabs.length} Tabs </span>
+                </div>
+              );
+            })}
           </div>
+        </div> 
         );
       })}
     
