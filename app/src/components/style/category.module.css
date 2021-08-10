@@ -70,6 +70,7 @@
 
 .container > .cardContainer > .groups > .card:hover {
   box-shadow: 0px 0px 15px -7px rgb(88, 88, 88);
+  transform: scale(1.08);
 }
 
 .container > .cardContainer > .groups > .card > .num {
