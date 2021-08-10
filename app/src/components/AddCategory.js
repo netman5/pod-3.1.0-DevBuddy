@@ -1,7 +1,5 @@
 /* global chrome */
-
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import styles from "../components/style/modal.module.css";
@@ -27,14 +25,16 @@ const useStyles = makeStyles((theme) => ({
 
 const initialValues = {
   category: '',
-  groupname: '',
-  tabs: []
+  group: '',
+  // tabs: ''
 }
 
-function AddCategory({ ModalState }) {
+function AddCategory({ ModalState, setGlobal}) {
   const [value, setValue] = useState(initialValues);
-  const [data, setData] = useState(MockData)
-
+  const [categoryFound, setCategoryFound] = useState(false)
+  const [groupFound, setGroupFound] = useState(false)
+  const [addData, setAddData] = useState([])
+  
   const handleChange = (e) => {
     const {name, value} = e.target;
     setValue({
@@ -45,49 +45,38 @@ function AddCategory({ ModalState }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    chrome.storage.local.get(["key"], function (result) {
+      let storedData = result.key;
+      setAddData(storedData)
 
-    // let category_found = false;
-    // let group_found = false
-    // for (let i = 0; i < data.length; i++) {
-    //   if (data[i].name === category) {
-    //     category_found = true;
-
-    //     for (let j = 0; j < data[i].groups.length; j++) {
-    //       if (data[i].groups[j].name === group) {
-    //         group_found = true;
-    //         console.log('group found');
-    //         for (let k = 0; k < data[i].groups.tabs.length; k++) {
-    //           data[i].groups[j].tabs.push(tabs[k]);
-    //         }
-    //       }
-    //     }
-
-    //     if (group_found === false) {
-    //       data[i].groups.push({
-    //         name: group,
-    //         tabs: tabs,
-    //       });
-    //     }
-    //   } 
-
-      
-    // }
-
-    // if (category_found === false) {
-    //   setData(
-    //     data.push({
-    //       name: category,
-    //       groups: [
-    //         {
-    //           name: group,
-    //           tabs: tabs,
-    //         },
-    //       ],
-    //     })
-    //   );
-    // }
-
-    ModalState(false);
+      addData.map((item) => {
+        if (item.name === value.category) {
+          setCategoryFound(true);
+        } else if (item.groups.name === value.group) {
+          setGroupFound(true);
+        } else {
+          // chrome.storage.local.set({ key: storeddata }, function (result) {
+          //   console.log("Value is set to " + result.storedData);
+          //   let data = result.storedData;
+          //   if (categoryFound && groupFound) {
+          //     setData({
+          //       ...data,
+          //       value,
+          //     });
+          //   }
+          // });
+          if(categoryFound && groupFound){
+            setAddData({
+              ...addData,
+              value
+            })
+            console.log(addData)
+          }
+        }
+      });
+      setGlobal(addData);
+      window.location.reload();
+    });
   };
 
 
@@ -115,7 +104,7 @@ function AddCategory({ ModalState }) {
             />
 
             <TextField
-              value={value.groupname}
+              value={value.group}
               name='groupname'
               id="outlined-secondary"
               label="Add group name"
@@ -126,14 +115,14 @@ function AddCategory({ ModalState }) {
               onChange={handleChange}
             />
 
-            <TextareaAutosize
+            {/* <TextareaAutosize
               value={value.tabs}
               name='tabs'
               className={styles.textArea}
               aria-label="maximum height"
               placeholder='Enter your url lists'
               onChange={handleChange}
-            />
+            /> */}
 
             <div className={styles.modalFooter}>
               <button id={styles.closeBtn}>

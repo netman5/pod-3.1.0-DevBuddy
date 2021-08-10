@@ -4,22 +4,17 @@ import React, { useEffect } from 'react';
 import mockData from '../utils/mock';
 import styles from './style/category.module.css';
 import AddIcon from '@material-ui/icons/Add';
-<<<<<<< HEAD
 import TabModal from './TabModal'
 import AddCategory from './AddCategory'
-=======
-import TabModal from './TabModal';
->>>>>>> staging
+
 
 function Category({ setGlobal }) {
   const [open, setOpen] = React.useState(false);
-<<<<<<< HEAD
-  const [openCat, setOpenCat] = React.useState(false)
-=======
   const [data, setData] = React.useState([]);
   const [currTabData, setCurrentTabData] = React.useState(null);
   const [catIndex, setCatIndex] = React.useState(null);
   const [groupIndex, setGroupIndex] = React.useState(null);
+  const [openCategory, setOpenCategory] = React.useState(false)
 
   useEffect(() => {
     chrome.storage.local.get(['key'], function (result) {
@@ -38,35 +33,19 @@ function Category({ setGlobal }) {
     setCatIndex(cIndex);
     setGroupIndex(gIndex);
   };
->>>>>>> staging
 
   return (
     <div className={styles.container}>
       <div className={styles.head}>
         <h1>Categories</h1>
-        <div className={styles.button} onClick={() => setOpenCat(true)}>
+        <div className={styles.button} onClick={() => setOpenCategory(true)}>
           <AddIcon/>
-          {openCat && <AddCategory ModalState={setOpenCat}/>}
+          {openCategory && <AddCategory ModalState={setOpenCategory} setGlobal={setGlobal}/>}
         </div>
       </div>
       {data.map((data, cIndex) => {
         return (
           <div className={styles.cardContainer} key={data.name}>
-<<<<<<< HEAD
-          <div className={styles.categoryName}>{data.name}</div>
-          <div className={styles.groups}>
-            {data.groups.map((group) => {
-              const {name, tabs} = group
-              
-              return (
-                
-                <div className={styles.card} key={name} onClick={()=> setOpen(true)}>
-                  <h3 className={styles.text}> {name}</h3> 
-                  <span className={styles.text}>{tabs.length} Tabs </span>
-                </div>
-              );
-            })}
-=======
             <div className={styles.categoryName}>{data.name}</div>
             <div className={styles.groups}>
               {data.groups.map((group, gIndex) => {
@@ -84,16 +63,10 @@ function Category({ setGlobal }) {
                 );
               })}
             </div>
->>>>>>> staging
           </div>
-        </div> 
+
         );
       })}
-<<<<<<< HEAD
-    
-    {open && < TabModal closeModal={setOpen}  open={open}/>}
-
-=======
 
       {open && (
         <TabModal
@@ -105,8 +78,7 @@ function Category({ setGlobal }) {
           open={open}
         />
       )}
->>>>>>> staging
-    </div>
+  </div>
   );
 }
 
