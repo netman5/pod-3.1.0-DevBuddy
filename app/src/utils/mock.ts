@@ -33,6 +33,41 @@ const data: category[] = [
             title:
               'Practice | GeeksforGeeks | A computer science portal for geeks',
           },
+          {
+            url: 'https://practice.geeksforgeeks.org/',
+            title:
+              'Practice | GeeksforGeeks | A computer science portal for geeks',
+          },
+          {
+            url: 'https://practice.geeksforgeeks.org/',
+            title:
+              'Practice | GeeksforGeeks | A computer science portal for geeks',
+          },
+          {
+            url: 'https://practice.geeksforgeeks.org/',
+            title:
+              'Practice | GeeksforGeeks | A computer science portal for geeks',
+          },
+          {
+            url: 'https://practice.geeksforgeeks.org/',
+            title:
+              'Practice | GeeksforGeeks | A computer science portal for geeks',
+          },
+          {
+            url: 'https://practice.geeksforgeeks.org/',
+            title:
+              'Practice | GeeksforGeeks | A computer science portal for geeks',
+          },
+          {
+            url: 'https://practice.geeksforgeeks.org/',
+            title:
+              'Practice | GeeksforGeeks | A computer science portal for geeks',
+          },
+          {
+            url: 'https://practice.geeksforgeeks.org/',
+            title:
+              'Practice | GeeksforGeeks | A computer science portal for geeks',
+          },
         ],
       },
       {
