@@ -23,66 +23,82 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AddCategory({ ModalState, setGlobal, data, setData}) {
+function AddCategory({ ModalState, setGlobal}) {
   const [categoryFound, setCategoryFound] = useState(false)
   const [groupFound, setGroupFound] = useState(false)
   const [category, setCategory] = useState('');
   const [group, setGroup] = useState('');
   const [tabs, setTabs] = useState([])
+
+  const getTabs = () => {
+    chrome.tabs.query(
+      { windowId: chrome.windows.WINDOW_ID_CURRENT },
+      (tabs) => {
+        const arrTabs = [...tabs];
+        setTabs(arrTabs);
+      }
+    );
+  }
+
   const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(data)
-    if (data === undefined) {
-      data = [
-        {
-          name: category,
-          groups: [
-            {
-              name: group,
-              tabs: tabs,
-            },
-          ],
-        },
-      ];
-    } else {
-      
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].name === category) {
-          setCategoryFound(!categoryFound)
-          for (let j = 0; j < data[i].groups.length; j++) {
-            if (data[i].groups[j].name === group) {
-              setGroupFound(!groupFound)
-              console.log('group found');
-              data[i].groups[j].tabs = [...data[i].groups[j].tabs, tabs];
-              // for (let k = 0; k < tabs.length; k++) {
-              //   data[i].groups[j].tabs.push(tabs[k]);
-              // }
+    chrome.storage.local.get(['key'], function (result) {
+      let storeData = result.key;
+      if (storeData === undefined) {
+        storeData = [
+          {
+            name: category,
+            groups: [
+              {
+                name: group,
+                tabs: tabs,
+              },
+            ],
+          },
+        ];
+      } else {
+        let category_found = false;
+        let group_found = false;
+        for (let i = 0; i < storeData.length; i++) {
+          if (storeData[i].name === category) {
+            category_found = true;
+            for (let j = 0; j < storeData[i].groups.length; j++) {
+              if (storeData[i].groups[j].name === group) {
+                group_found = true
+                console.log('group found');
+                // storeData[i].groups[j].tabs = [...storeData[i].groups[j].tabs, tabs];
+                 for (let k = 0; k < tabs.length; k++) {
+                  storeData[i].groups[j].tabs.push(tabs[k]);
+                }
+              }
+            }
+  
+            if (group_found === false) {
+              storeData[i].groups.push({
+                name: group,
+                tabs: tabs,
+              });
             }
           }
-
-          if (groupFound === false) {
-            data[i].groups.push({
-              name: group,
-              tabs: tabs,
-            });
-          }
+        }
+  
+        if (category_found === false) {
+          storeData.push({
+            name: category,
+            groups: [
+              {
+                name: group,
+                tabs: tabs,
+              },
+            ],
+          });
         }
       }
+      
+      setGlobal(storeData);
+      window.location.reload();
+    });
 
-      if (categoryFound === false) {
-        data.push({
-          name: category,
-          groups: [
-            {
-              name: group,
-              tabs: tabs,
-            },
-          ],
-        });
-      }
-    }
-    setGlobal(data);
-    window.location.reload();
+    event.preventDefault();
   };
 
 
@@ -96,7 +112,7 @@ function AddCategory({ ModalState, setGlobal, data, setData}) {
     <div className={styles.modalBackground}>
       <div className={styles.addModalContainer}>
         <div className={styles.body}>
-          <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
+          <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit} onClick={getTabs}>
             <TextField
               value={category}
               id="outlined-primary"
