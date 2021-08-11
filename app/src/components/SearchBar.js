@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { alpha, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
+import styles from './style/search.module.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
     transition: theme.transitions.create('width'),
     width: '100%',
+    color: 'white',
   },
 }));
 
@@ -64,7 +66,24 @@ export default function SearchAppBar() {
 
   return (
     <div>
-      <AppBar position='static'>
+      <div className={styles.header}>
+        <p className={styles.headerTitle}>Tabify</p>
+        <div className={classes.search}>
+          <div className={classes.searchIcon}>
+            <SearchIcon />
+          </div>
+          <InputBase
+            placeholder='Search Category'
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+            inputProps={{ 'aria-label': 'search' }}
+            onChange={(qry) => searchHandler(qry.target.value)}
+          />
+        </div>
+      </div>
+      {/* <AppBar position='static'>
         <Toolbar className={classes.root}>
           <Typography className={classes.title} variant='h6' noWrap>
             Tabify
@@ -84,7 +103,7 @@ export default function SearchAppBar() {
             />
           </div>
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
     </div>
   );
 }
