@@ -23,60 +23,66 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const initialValues = {
-  category: '',
-  group: '',
-  // tabs: ''
-}
-
-function AddCategory({ ModalState, setGlobal}) {
-  const [value, setValue] = useState(initialValues);
+function AddCategory({ ModalState, setGlobal, data, setData}) {
   const [categoryFound, setCategoryFound] = useState(false)
   const [groupFound, setGroupFound] = useState(false)
-  const [addData, setAddData] = useState([])
-  
-  const handleChange = (e) => {
-    const {name, value} = e.target;
-    setValue({
-      ...value,
-      [name]: value,
-    });
-  };
-
+  const [category, setCategory] = useState('');
+  const [group, setGroup] = useState('');
+  const [tabs, setTabs] = useState([])
   const handleSubmit = (event) => {
     event.preventDefault();
-    chrome.storage.local.get(["key"], function (result) {
-      let storedData = result.key;
-      setAddData(storedData)
+    console.log(data)
+    if (data === undefined) {
+      data = [
+        {
+          name: category,
+          groups: [
+            {
+              name: group,
+              tabs: tabs,
+            },
+          ],
+        },
+      ];
+    } else {
+      
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].name === category) {
+          setCategoryFound(!categoryFound)
+          for (let j = 0; j < data[i].groups.length; j++) {
+            if (data[i].groups[j].name === group) {
+              setGroupFound(!groupFound)
+              console.log('group found');
+              data[i].groups[j].tabs = [...data[i].groups[j].tabs, tabs];
+              // for (let k = 0; k < tabs.length; k++) {
+              //   data[i].groups[j].tabs.push(tabs[k]);
+              // }
+            }
+          }
 
-      addData.map((item) => {
-        if (item.name === value.category) {
-          setCategoryFound(true);
-        } else if (item.groups.name === value.group) {
-          setGroupFound(true);
-        } else {
-          // chrome.storage.local.set({ key: storeddata }, function (result) {
-          //   console.log("Value is set to " + result.storedData);
-          //   let data = result.storedData;
-          //   if (categoryFound && groupFound) {
-          //     setData({
-          //       ...data,
-          //       value,
-          //     });
-          //   }
-          // });
-          if(categoryFound && groupFound){
-            setAddData({
-              ...addData,
-              value
-            })
-            console.log(addData)
+          if (groupFound === false) {
+            data[i].groups.push({
+              name: group,
+              tabs: tabs,
+            });
           }
         }
-      });
-      setGlobal(addData);
-      window.location.reload();
-    });
+      }
+
+      if (categoryFound === false) {
+        data.push({
+          name: category,
+          groups: [
+            {
+              name: group,
+              tabs: tabs,
+            },
+          ],
+        });
+      }
+    }
+    setGlobal(data);
+    window.location.reload();
   };
 
 
@@ -90,42 +96,54 @@ function AddCategory({ ModalState, setGlobal}) {
     <div className={styles.modalBackground}>
       <div className={styles.addModalContainer}>
         <div className={styles.body}>
-          <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit} onClick={handleClose}>
+          <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSubmit}>
             <TextField
-              value={value.category}
-              name="category"
+              value={category}
               id="outlined-primary"
               label="Add new category"
               variant="outlined"
               color="secondary"
               required={true}
               size='small'
-              onChange={handleChange}
+              onChange={(e)=>setCategory(e.target.value)}
             />
 
             <TextField
-              value={value.group}
-              name='groupname'
+              value={group}
               id="outlined-secondary"
               label="Add group name"
               variant="outlined"
               color="secondary"
               required={true}
               size='small'
-              onChange={handleChange}
+              onChange={(e) => setGroup(e.target.value)}
             />
 
+            {/* <TextField
+              value={tabs}
+              id="outlined-secondary"
+              label="Add group name"
+              variant="outlined"
+              color="secondary"
+              required={true}
+              size='small'
+              onChange={(e) => setTabs(e.target.value)}
+            /> */}
+
             {/* <TextareaAutosize
-              value={value.tabs}
+              value={tabs}
               name='tabs'
               className={styles.textArea}
               aria-label="maximum height"
               placeholder='Enter your url lists'
-              onChange={handleChange}
+              onChange={(e) => setTabs(e.target.value)}
             /> */}
 
             <div className={styles.modalFooter}>
-              <button id={styles.closeBtn}>
+              <button 
+              id={styles.closeBtn}
+              onClick={handleClose}
+              >
                 Close
               </button>
               <button>Add</button>

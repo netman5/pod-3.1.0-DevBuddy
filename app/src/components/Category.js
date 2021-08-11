@@ -40,7 +40,7 @@ function Category({ setGlobal }) {
         <h1>Categories</h1>
         <div className={styles.button} onClick={() => setOpenCategory(true)}>
           <AddIcon/>
-          {openCategory && <AddCategory ModalState={setOpenCategory} setGlobal={setGlobal}/>}
+          {openCategory && <AddCategory ModalState={setOpenCategory} data={data} setData={setData} setGlobal={setGlobal}/>}
         </div>
       </div>
       {data.map((data, cIndex) => {
