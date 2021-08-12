@@ -8,8 +8,9 @@ import TabModal from './TabModal';
 import AddCategory from './AddCategory';
 import { Delete, PlusSquare, Trash2 } from 'react-feather';
 import AddGroup from './AddGroup';
+import { toast, ToastContainer } from 'react-toastify';
 
-function Category({ setGlobal , currentData, setData}) {
+function Category({ setGlobal, currentData, setData }) {
   const [open, setOpen] = React.useState(false);
   // const [currentData, setData] = React.useState(currentData);
   const [currTabData, setCurrentTabData] = React.useState(null);
@@ -19,11 +20,11 @@ function Category({ setGlobal , currentData, setData}) {
   const [openAddGroup, setOpenAddGroup] = React.useState(false);
   const [categoryIndex, setCategoryIndex] = React.useState(null);
 
-  // useEffect(() => { 
+  // useEffect(() => {
   //       setData(currentData);
   //       console.log("category",data)
   // }, []);
-  console.log("cat,", currentData)
+  console.log('cat,', currentData);
 
   const handleTabClick = (group, cIndex, gIndex) => {
     setOpen(true);
@@ -57,6 +58,13 @@ function Category({ setGlobal , currentData, setData}) {
     setCategoryIndex(cIndex);
     setOpenAddGroup(!openAddGroup);
     // copy_data[cIndex].group;
+  };
+
+  const showMessage = (type, msg) => {
+    console.log('Here', type);
+    if (type === 'error') {
+      toast.error(msg);
+    }
   };
 
   return (
@@ -120,6 +128,7 @@ function Category({ setGlobal , currentData, setData}) {
           setData={setData}
           setGlobal={setGlobal}
           cIndex={categoryIndex}
+          showMessage={showMessage}
         />
       )}
       {openCategory && (
@@ -128,6 +137,7 @@ function Category({ setGlobal , currentData, setData}) {
           data={currentData}
           setData={setData}
           setGlobal={setGlobal}
+          showMessage={showMessage}
         />
       )}
     </div>

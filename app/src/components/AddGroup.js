@@ -24,11 +24,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AddGroup({ ModalState, setGlobal, cIndex, data }) {
+function AddGroup({ ModalState, setGlobal, cIndex, data, showMessage }) {
   const [group, setGroup] = useState('');
   const [tabs, setTabs] = useState([]);
 
   const handleSubmit = (event) => {
+    if (group === '') {
+      showMessage('error', 'Group is empty');
+      return;
+    }
     let copy_data = data;
     copy_data[cIndex].groups.push({
       name: group,
