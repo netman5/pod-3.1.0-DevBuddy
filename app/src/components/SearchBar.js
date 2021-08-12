@@ -68,7 +68,9 @@ export default function SearchAppBar({setData,fulldata}) {
       setData(fulldata);
     }
     else{
-      let filteredCategories= fulldata.filter(cat=>cat.name.toLowerCase()==qry.toLowerCase())
+      let filteredCategories= fulldata.filter(cat=>{
+        return cat.name.toLowerCase().indexOf(qry.toLowerCase())==-1?false:true;
+      })
       setData(filteredCategories)
     }
   };
