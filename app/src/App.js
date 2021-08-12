@@ -7,36 +7,29 @@ import mockData from './utils/mock';
 
 const App = () => {
   const [currentData, setCurrentData] = React.useState([]);
-  // var currentData=[];
   const [fulldata, setFullData] = React.useState([]);
 
   useEffect(() => {
     chrome.storage.local.get(['key'], function (result) {
       const res = result.key;
-      console.log('Data in Category is :  ');
-      console.log(res);
       if (res) {
         setFullData(res);
         setData(res);
-        console.log("res-",res);
-        console.log("fullData-",fulldata);
       }
     });
   }, []);
 
   const setGlobal = (data) => {
-    chrome.storage.local.set({ key: data }, function () {
-      console.log('Global Value set', data);
-    });
+    chrome.storage.local.set({ key: data }, function () {});
   };
 
-  const setData=(data)=>{
-      setCurrentData(data)
-  }
+  const setData = (data) => {
+    setCurrentData(data);
+  };
 
   return (
     <div className='App'>
-      <SearchBar fulldata={fulldata} setData={setData}/>
+      <SearchBar fulldata={fulldata} setData={setData} />
       <Home setData={setData} currentData={currentData} setGlobal={setGlobal} />
     </div>
   );

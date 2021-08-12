@@ -12,19 +12,12 @@ import { toast, ToastContainer } from 'react-toastify';
 
 function Category({ setGlobal, currentData, setData }) {
   const [open, setOpen] = React.useState(false);
-  // const [currentData, setData] = React.useState(currentData);
   const [currTabData, setCurrentTabData] = React.useState(null);
   const [catIndex, setCatIndex] = React.useState(null);
   const [groupIndex, setGroupIndex] = React.useState(null);
   const [openCategory, setOpenCategory] = React.useState(false);
   const [openAddGroup, setOpenAddGroup] = React.useState(false);
   const [categoryIndex, setCategoryIndex] = React.useState(null);
-
-  // useEffect(() => {
-  //       setData(currentData);
-  //       console.log("category",data)
-  // }, []);
-  console.log('cat,', currentData);
 
   const handleTabClick = (group, cIndex, gIndex) => {
     setOpen(true);
@@ -34,22 +27,18 @@ function Category({ setGlobal, currentData, setData }) {
   };
 
   const deleteGroup = (gIndex, cIndex) => {
-    console.log(cIndex, gIndex);
     let copy_data = currentData;
     copy_data[cIndex].groups.splice(gIndex, 1);
     setData(copy_data);
     setGlobal(copy_data);
-    console.log(copy_data);
     window.location.reload();
   };
 
   const deleteCategory = (cIndex) => {
-    console.log(cIndex);
     let copy_data = currentData;
     copy_data.splice(cIndex, 1);
     setData(copy_data);
     setGlobal(copy_data);
-    console.log(copy_data);
     window.location.reload();
   };
 
@@ -61,7 +50,6 @@ function Category({ setGlobal, currentData, setData }) {
   };
 
   const showMessage = (type, msg) => {
-    console.log('Here', type);
     if (type === 'error') {
       toast.error(msg);
     }
@@ -90,7 +78,11 @@ function Category({ setGlobal, currentData, setData }) {
                 const { name, tabs } = group;
 
                 return (
-                  <div className={styles.card} key={name}>
+                  <div
+                    onClick={() => handleTabClick(group, cIndex, gIndex)}
+                    className={styles.card}
+                    key={name}
+                  >
                     <div
                       className={styles.delete}
                       onClick={() => {
@@ -99,7 +91,7 @@ function Category({ setGlobal, currentData, setData }) {
                     >
                       <Trash2 color='gray' />
                     </div>
-                    <div onClick={() => handleTabClick(group, cIndex, gIndex)}>
+                    <div>
                       <h3 className={styles.text}> {name}</h3>
                       <span className={styles.text}>{tabs.length} Tabs </span>
                     </div>

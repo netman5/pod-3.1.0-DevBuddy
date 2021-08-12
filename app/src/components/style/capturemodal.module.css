@@ -23,6 +23,8 @@
   padding: 30px;
   align-items: flex-start;
   box-sizing: border-box;
+  height: 110vw;
+  max-height: 80vh;
 }
 
 .tabList {

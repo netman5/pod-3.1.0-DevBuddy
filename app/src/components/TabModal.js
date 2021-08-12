@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import styles from '../components/style/modal.module.css';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -11,6 +10,7 @@ function TabModal(props) {
   const [tabsData] = useState(data.tabs);
   const [tabs, setTabs] = useState([]);
   const [selectAll, setSelectAll] = useState(false);
+  const [tabsSelected, setTabsSelected] = useState(0);
   useEffect(() => {
     let newTabs = [];
     tabsData.forEach((item) => {
@@ -21,6 +21,16 @@ function TabModal(props) {
     });
     setTabs(newTabs);
   }, []);
+
+  useEffect(() => {
+    let count = 0;
+    tabs.forEach((tab) => {
+      if (tab.state === true) {
+        count++;
+      }
+    });
+    setTabsSelected(count);
+  }, [tabs]);
 
   const handleSelectAll = (event) => {
     let newTabs = tabs;
@@ -73,14 +83,20 @@ function TabModal(props) {
         <h1 className={styles.title}>{data.name}</h1>
 
         <div className={styles.body}>
-          <div className={styles.tab}>
-            <Checkbox
-              checked={selectAll}
-              onChange={handleSelectAll}
-              className={styles.tab}
-            />
-            <span className={styles.tabName}></span>
-          </div>
+          {tabs.length != 0 ? (
+            <div className={styles.tabHead}>
+              <Checkbox
+                checked={selectAll}
+                onChange={handleSelectAll}
+                className={styles.tab}
+              />
+              {tabsSelected != 0 ? (
+                <span className={styles.tabNo}>
+                  {tabsSelected} Tabs Selected
+                </span>
+              ) : null}
+            </div>
+          ) : null}
           <div className={styles.tabs}>
             {tabs.map((tab, index) => {
               return (

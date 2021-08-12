@@ -28,9 +28,7 @@ const CategorySelect = ({
   setGroup,
 }) => {
   const [cIndex, setCIndex] = useState(0);
-  useEffect(() => {
-    if (cIndex) console.log('category index', data[cIndex]);
-  });
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -49,10 +47,8 @@ const CategorySelect = ({
             value={categoryIndex}
             onChange={(e) => {
               let index = parseInt(e.target.value);
-              console.log('index calling', index);
               setCategoryIndex(index);
               setCIndex(index);
-              console.log(data[index]);
               setCategory(data[index].name);
             }}
             label='Age'
@@ -144,20 +140,14 @@ const CaptureModal = ({ open, onClose, tabs, onRemoveTab, setGlobal }) => {
   useEffect(() => {
     chrome.storage.local.get(['key'], function (result) {
       const res = result.key;
-      console.log('Data in Category is :  ');
-      console.log(res);
       if (res) {
         setData(res);
       }
     });
   }, []);
 
-  useEffect(() => {
-    console.log('cIndex', categoryIndex);
-  });
   const captureModal = () => {
     chrome.storage.local.get(['key'], function (result) {
-      console.log('Value currently is ' + result.key);
       let data = result.key;
       if (data === undefined) {
         data = [
@@ -181,8 +171,6 @@ const CaptureModal = ({ open, onClose, tabs, onRemoveTab, setGlobal }) => {
             for (let j = 0; j < data[i].groups.length; j++) {
               if (data[i].groups[j].name === group) {
                 group_found = true;
-                console.log('group found');
-                //data[i].groups[j].tabs = [...data[i].groups[j].tabs, tabs];
                 for (let k = 0; k < tabs.length; k++) {
                   data[i].groups[j].tabs.push(tabs[k]);
                 }
@@ -212,7 +200,6 @@ const CaptureModal = ({ open, onClose, tabs, onRemoveTab, setGlobal }) => {
       }
 
       setGlobal(data);
-      console.log(data);
       onClose('success');
       window.location.reload();
     });

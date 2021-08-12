@@ -10,14 +10,9 @@ chrome.browserAction.onClicked.addListener(function () {
 });
 
 // captures all current window tabs
-chrome.tabs.query({windowId: chrome.windows.WINDOW_ID_CURRENT}, (tabs) => {
-  const arrTabs = [...tabs]
-  arrTabs.forEach(tab => {
-    const {url, id, title} = tab;
-    console.log(id, url, title)
-  })
-})
-
-
-
-   
+chrome.tabs.query({ windowId: chrome.windows.WINDOW_ID_CURRENT }, (tabs) => {
+  const arrTabs = [...tabs];
+  arrTabs.forEach((tab) => {
+    const { url, id, title } = tab;
+  });
+});
