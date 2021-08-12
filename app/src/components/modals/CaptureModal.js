@@ -107,45 +107,6 @@ const CategorySelect = ({
   );
 };
 
-// const GroupSelect = ({ group, setGroup, categoryIndex, data }) => {
-//   useEffect(() => {
-//     if (categoryIndex) console.log('indexdd', data[categoryIndex]);
-//   }, [categoryIndex]);
-//   return (
-//     <ThemeProvider theme={theme}>
-//       <FormControl
-//         variant='outlined'
-//         style={{ margin: '10px', borderColor: '#0000', flex: 1 }}
-//       >
-//         <InputLabel
-//           htmlFor='outlined-age-native-simple'
-//           style={{ color: '#000' }}
-//         >
-//           Select Group
-//         </InputLabel>
-//         <Select
-//           native
-//           value={group}
-//           onChange={(e) => {
-//             setGroup(e.target.value);
-//           }}
-//           label='Age'
-//           inputProps={{
-//             name: 'age',
-//             id: 'outlined-age-native-simple',
-//           }}
-//         >
-//           <option aria-label='None' value='' />
-//           {/* {categoryIndex !== null &&
-//             data[categoryIndex].groups.map((group) => {
-//               return <option value={group.name}>{group.name}</option>;
-//             })} */}
-//         </Select>
-//       </FormControl>
-//     </ThemeProvider>
-//   );
-// };
-
 const Tab = ({ tab, onRemoveTab }) => {
   const closeTab = () => {
     onRemoveTab(tab.id);
@@ -258,8 +219,8 @@ const CaptureModal = ({ open, onClose, tabs, onRemoveTab, setGlobal }) => {
   };
   return (
     <motion.div>
-      {open && (
-        <AnimatePresence>
+      <AnimatePresence>
+        {open && (
           <motion.div
             className={styles.modalContainer}
             initial={{ opacity: 0 }}
@@ -309,8 +270,8 @@ const CaptureModal = ({ open, onClose, tabs, onRemoveTab, setGlobal }) => {
               </motion.button>
             </motion.div>
           </motion.div>
-        </AnimatePresence>
-      )}
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 };
