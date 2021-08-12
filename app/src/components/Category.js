@@ -6,7 +6,7 @@ import styles from './style/category.module.css';
 import AddIcon from '@material-ui/icons/Add';
 import TabModal from './TabModal';
 import AddCategory from './AddCategory';
-import { Delete, Trash2 } from 'react-feather';
+import { Delete, PlusSquare, Trash2 } from 'react-feather';
 import AddGroup from './AddGroup';
 
 function Category({ setGlobal }) {
@@ -76,11 +76,11 @@ function Category({ setGlobal }) {
         return (
           <div className={styles.cardContainer} key={data.name}>
             <div className={styles.categoryName}>
-              {data.name}{' '}
-              <button onClick={() => deleteCategory(cIndex)}>Delete</button>
-              <button onClick={() => addGroupInCategory(cIndex)}>
-                Add Group
-              </button>
+              <p>{data.name}</p>
+              <div className={styles.setting}>
+                <Trash2 onClick={() => deleteCategory(cIndex)} />
+                <PlusSquare onClick={() => addGroupInCategory(cIndex)} />
+              </div>
             </div>
             <div className={styles.groups}>
               {data.groups.map((group, gIndex) => {

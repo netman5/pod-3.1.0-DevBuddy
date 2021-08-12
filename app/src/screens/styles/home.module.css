@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300;400&display=swap');
+
 .container {
   width: 70%;
   margin: 0 auto;
@@ -25,14 +27,11 @@
 .capture > .button {
   margin: 20px;
   padding: 10px 25px;
-  background-color: #1e90ff;
+  background-color: #171c26;
   color: white;
   font-weight: 600;
   font-size: 1.2em;
-  border-radius: 10px;
+  border-radius: 6px;
   cursor: pointer;
-}
-
-.capture > .button:hover {
-  background-color: #0070ff;
+  font-family: 'Oxygen', sans-serif;
 }
