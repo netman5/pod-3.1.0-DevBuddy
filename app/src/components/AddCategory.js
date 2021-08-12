@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import styles from '../components/style/modal.module.css';
 import { Typography } from '@material-ui/core';
+import { toast } from 'react-toastify';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,12 +25,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AddCategory({ ModalState, setGlobal, data }) {
+function AddCategory({ ModalState, setGlobal, data, showMessage }) {
   const [category, setCategory] = useState('');
   const [group, setGroup] = useState('');
   const [tabs, setTabs] = useState([]);
 
   const handleSubmit = () => {
+    if (category === '' || group === '') {
+      showMessage('error', 'Category or Group is empty');
+      return;
+    }
     let copy_data = data;
     copy_data.push({
       name: category,
@@ -68,10 +73,6 @@ function AddCategory({ ModalState, setGlobal, data }) {
               size='small'
               onChange={(e) => setGroup(e.target.value)}
             />
-            <Typography className={classes.text} variant='body1'>
-              Click add to capture current window tabs.
-            </Typography>
-
             <div className={styles.modalFooter}>
               <button
                 className={styles.closeAddModalBtn}

@@ -8,6 +8,7 @@ import TabModal from './TabModal';
 import AddCategory from './AddCategory';
 import { Delete, PlusSquare, Trash2 } from 'react-feather';
 import AddGroup from './AddGroup';
+import { toast, ToastContainer } from 'react-toastify';
 
 function Category({ setGlobal, currentData, setData }) {
   const [open, setOpen] = React.useState(false);
@@ -46,6 +47,12 @@ function Category({ setGlobal, currentData, setData }) {
     setCategoryIndex(cIndex);
     setOpenAddGroup(!openAddGroup);
     // copy_data[cIndex].group;
+  };
+
+  const showMessage = (type, msg) => {
+    if (type === 'error') {
+      toast.error(msg);
+    }
   };
 
   return (
@@ -113,6 +120,7 @@ function Category({ setGlobal, currentData, setData }) {
           setData={setData}
           setGlobal={setGlobal}
           cIndex={categoryIndex}
+          showMessage={showMessage}
         />
       )}
       {openCategory && (
@@ -121,6 +129,7 @@ function Category({ setGlobal, currentData, setData }) {
           data={currentData}
           setData={setData}
           setGlobal={setGlobal}
+          showMessage={showMessage}
         />
       )}
     </div>
