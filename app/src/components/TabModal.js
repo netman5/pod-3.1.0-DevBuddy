@@ -36,7 +36,6 @@ function TabModal(props) {
   };
 
   const handleRestore = () => {
-    console.log(tabs);
     tabs.forEach((tab) => {
       if (tab.state == true) {
         chrome.tabs.create({
@@ -49,12 +48,15 @@ function TabModal(props) {
   const handleDelete = () => {
     chrome.storage.local.get(['key'], function (result) {
       const res = result.key;
+      let idxArr = [];
       tabs.forEach((tab, index) => {
         if (tab.state == true) {
-          console.log(res[catIndex].groups[groupIndex].tabs[index]);
-          res[catIndex].groups[groupIndex].tabs.splice(index, 1);
+          idxArr.push(index);
         }
       });
+      res[catIndex].groups[groupIndex].tabs = res[catIndex].groups[
+        groupIndex
+      ].tabs.filter((item, index) => !idxArr.includes(index));
       setGlobal(res);
       window.location.reload();
     });
