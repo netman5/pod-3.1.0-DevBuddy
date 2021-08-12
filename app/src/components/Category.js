@@ -9,9 +9,9 @@ import AddCategory from './AddCategory';
 import { Delete, PlusSquare, Trash2 } from 'react-feather';
 import AddGroup from './AddGroup';
 
-function Category({ setGlobal }) {
+function Category({ setGlobal , currentData, setData}) {
   const [open, setOpen] = React.useState(false);
-  const [data, setData] = React.useState([]);
+  // const [currentData, setData] = React.useState(currentData);
   const [currTabData, setCurrentTabData] = React.useState(null);
   const [catIndex, setCatIndex] = React.useState(null);
   const [groupIndex, setGroupIndex] = React.useState(null);
@@ -19,16 +19,11 @@ function Category({ setGlobal }) {
   const [openAddGroup, setOpenAddGroup] = React.useState(false);
   const [categoryIndex, setCategoryIndex] = React.useState(null);
 
-  useEffect(() => {
-    chrome.storage.local.get(['key'], function (result) {
-      const res = result.key;
-      console.log('Data in Category is :  ');
-      console.log(res);
-      if (res) {
-        setData(res);
-      }
-    });
-  }, []);
+  // useEffect(() => { 
+  //       setData(currentData);
+  //       console.log("category",data)
+  // }, []);
+  console.log("cat,", currentData)
 
   const handleTabClick = (group, cIndex, gIndex) => {
     setOpen(true);
@@ -39,7 +34,7 @@ function Category({ setGlobal }) {
 
   const deleteGroup = (gIndex, cIndex) => {
     console.log(cIndex, gIndex);
-    let copy_data = data;
+    let copy_data = currentData;
     copy_data[cIndex].groups.splice(gIndex, 1);
     setData(copy_data);
     setGlobal(copy_data);
@@ -49,7 +44,7 @@ function Category({ setGlobal }) {
 
   const deleteCategory = (cIndex) => {
     console.log(cIndex);
-    let copy_data = data;
+    let copy_data = currentData;
     copy_data.splice(cIndex, 1);
     setData(copy_data);
     setGlobal(copy_data);
@@ -58,7 +53,7 @@ function Category({ setGlobal }) {
   };
 
   const addGroupInCategory = (cIndex) => {
-    let copy_data = data;
+    let copy_data = currentData;
     setCategoryIndex(cIndex);
     setOpenAddGroup(!openAddGroup);
     // copy_data[cIndex].group;
@@ -72,7 +67,7 @@ function Category({ setGlobal }) {
           <AddIcon />
         </div>
       </div>
-      {data.map((data, cIndex) => {
+      {currentData.map((data, cIndex) => {
         return (
           <div className={styles.cardContainer} key={data.name}>
             <div className={styles.categoryName}>
@@ -121,7 +116,7 @@ function Category({ setGlobal }) {
       {openAddGroup && (
         <AddGroup
           ModalState={setOpenAddGroup}
-          data={data}
+          data={currentData}
           setData={setData}
           setGlobal={setGlobal}
           cIndex={categoryIndex}
@@ -130,7 +125,7 @@ function Category({ setGlobal }) {
       {openCategory && (
         <AddCategory
           ModalState={setOpenCategory}
-          data={data}
+          data={currentData}
           setData={setData}
           setGlobal={setGlobal}
         />

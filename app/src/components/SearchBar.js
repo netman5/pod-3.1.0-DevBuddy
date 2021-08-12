@@ -1,4 +1,6 @@
-import React from 'react';
+/* global chrome */
+
+import React,{useState,useEffect} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -57,11 +59,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchAppBar() {
+export default function SearchAppBar({setData,fulldata}) {
   const classes = useStyles();
+  
 
-  const searchHandler = (qry) => {
-    // console.log(qry);
+  const searchHandler = async(qry) => {
+    if(qry.length==0){
+      setData(fulldata);
+    }
+    else{
+      let filteredCategories= fulldata.filter(cat=>cat.name.toLowerCase()==qry.toLowerCase())
+      setData(filteredCategories)
+    }
   };
 
   return (
