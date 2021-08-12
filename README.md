@@ -8,6 +8,10 @@ This is a Chrome Extension developer tools for capturing the current window tabs
 
 ## Demo
 
+
+https://user-images.githubusercontent.com/45001916/129273905-8904fe43-aa74-4edf-9809-12577fd9103f.mp4
+
+
 ## Installation
 Navigate to chrome extension page `extension link` or search for Tabify in chrome web store. Install then you are good to go.
 
