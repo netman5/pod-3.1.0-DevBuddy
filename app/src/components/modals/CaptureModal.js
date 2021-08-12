@@ -122,7 +122,6 @@ const CaptureModal = ({ open, onClose, tabs, onRemoveTab, setGlobal }) => {
   const captureModal = () => {
     chrome.storage.local.get(['key'], function (result) {
       console.log('Value currently is ' + result.key);
-      //console.log(result.key.length);
       let data = result.key;
       if (data === undefined) {
         data = [

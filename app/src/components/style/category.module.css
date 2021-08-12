@@ -66,6 +66,11 @@
   box-shadow: 0px 2px 5px 0px rgb(0, 0, 0, 0.25);
   transition: 00.3s all;
   min-width: 200px;
+  position: relative;
+}
+
+.container > .cardContainer > .groups > .card > .delete {
+  display: none;
 }
 
 .container > .cardContainer > .groups > .card:hover {
@@ -73,9 +78,17 @@
   transform: scale(1.08);
 }
 
+.container > .cardContainer > .groups > .card:hover > .delete {
+  top: 0px;
+  right: 10px;
+  position: absolute;
+  display: block;
+  cursor: pointer;
+}
+
 .container > .cardContainer > .groups > .card > .num {
   padding: 0 10px;
 }
-.container > .cardContainer > .groups > .card > .text {
+.text {
   font-size: 0.5em;
 }
