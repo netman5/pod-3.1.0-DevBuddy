@@ -35,7 +35,3 @@
   cursor: pointer;
   font-family: 'Oxygen', sans-serif;
 }
-
-.capture > .button:hover {
-  background-color: #0070ff;
-}
