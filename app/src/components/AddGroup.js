@@ -24,20 +24,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AddCategory({ ModalState, setGlobal, data }) {
-  const [category, setCategory] = useState('');
+function AddGroup({ ModalState, setGlobal, cIndex, data }) {
   const [group, setGroup] = useState('');
   const [tabs, setTabs] = useState([]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
     let copy_data = data;
-    copy_data.push({
-      name: category,
-      groups: [{ name: group, tabs: [] }],
+    copy_data[cIndex].groups.push({
+      name: group,
+      tabs: [],
     });
 
     setGlobal(copy_data);
-    ModalState(false);
     window.location.reload();
   };
 
@@ -47,17 +45,12 @@ function AddCategory({ ModalState, setGlobal, data }) {
     <div className={styles.modalBackground}>
       <div className={styles.addModalContainer}>
         <div className={styles.body}>
-          <form className={classes.root} noValidate autoComplete='off'>
-            <TextField
-              value={category}
-              id='outlined-primary'
-              label='Add new category'
-              variant='outlined'
-              color='secondary'
-              required={true}
-              size='small'
-              onChange={(e) => setCategory(e.target.value)}
-            />
+          <form
+            className={classes.root}
+            noValidate
+            autoComplete='off'
+            onSubmit={handleSubmit}
+          >
             <TextField
               value={group}
               id='outlined-secondary'
@@ -75,13 +68,11 @@ function AddCategory({ ModalState, setGlobal, data }) {
             <div className={styles.modalFooter}>
               <button
                 className={styles.closeAddModalBtn}
-                onClick={() => {
-                  ModalState(false);
-                }}
+                onClick={() => ModalState(false)}
               >
                 Close
               </button>
-              <button onClick={handleSubmit}>Add</button>
+              <button>Add</button>
             </div>
           </form>
         </div>
@@ -90,4 +81,4 @@ function AddCategory({ ModalState, setGlobal, data }) {
   );
 }
 
-export default AddCategory;
+export default AddGroup;
