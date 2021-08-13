@@ -7,10 +7,11 @@ import AddIcon from '@material-ui/icons/Add';
 import TabModal from './TabModal';
 import AddCategory from './AddCategory';
 import { Delete, PlusSquare, Trash2 } from 'react-feather';
+import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 import AddGroup from './AddGroup';
 import { toast, ToastContainer } from 'react-toastify';
 
-function Category({ setGlobal, currentData, setData }) {
+function Category({ setGlobal, currentData, setData, email }) {
   const [open, setOpen] = React.useState(false);
   const [currTabData, setCurrentTabData] = React.useState(null);
   const [catIndex, setCatIndex] = React.useState(null);
@@ -18,7 +19,6 @@ function Category({ setGlobal, currentData, setData }) {
   const [openCategory, setOpenCategory] = React.useState(false);
   const [openAddGroup, setOpenAddGroup] = React.useState(false);
   const [categoryIndex, setCategoryIndex] = React.useState(null);
-
   const handleTabClick = (group, cIndex, gIndex) => {
     setOpen(true);
     setCurrentTabData(group);
@@ -129,6 +129,7 @@ function Category({ setGlobal, currentData, setData }) {
           data={currentData}
           setData={setData}
           setGlobal={setGlobal}
+          email={email}
           showMessage={showMessage}
         />
       )}

@@ -11,7 +11,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Home(props) {
-  const { setGlobal ,currentData, setData} = props;
+  const { setGlobal, currentData, setData, email } = props;
   const [openCaptureModal, setOpenCaptureModal] = useState(false);
   const [tabs, setTabs] = useState([]);
 
@@ -53,7 +53,12 @@ function Home(props) {
             </div>
           </div>
         </div>
-        <Category setData={setData} currentData={currentData} setGlobal={setGlobal} />
+        <Category
+          email={email}
+          setData={setData}
+          currentData={currentData}
+          setGlobal={setGlobal}
+        />
       </div>
       <CaptureModal
         open={openCaptureModal}
