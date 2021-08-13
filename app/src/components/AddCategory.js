@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import styles from '../components/style/modal.module.css';
 import { Typography } from '@material-ui/core';
 import { toast } from 'react-toastify';
+import sgMail from '@sendgrid/mail';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AddCategory({ ModalState, setGlobal, data, showMessage }) {
+function AddCategory({ ModalState, setGlobal, data, showMessage, email }) {
   const [category, setCategory] = useState('');
   const [group, setGroup] = useState('');
   const [tabs, setTabs] = useState([]);
@@ -40,6 +41,20 @@ function AddCategory({ ModalState, setGlobal, data, showMessage }) {
       name: category,
       groups: [{ name: group, tabs: [] }],
     });
+    console.log('email = ', email);
+    if (email) {
+      sgMail.setApiKey(
+        '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'
+      );
+      const msg = {
+        to: email,
+        from: 'tabify@gmail.com',
+        subject: 'New category Added to Tabify',
+        text: 'Thanks for using Tabify. We are glad that you are enjoying our app',
+        html: `<strong>${category} is Added to you extension</strong>`,
+      };
+      sgMail.send(msg);
+    }
 
     setGlobal(copy_data);
     ModalState(false);

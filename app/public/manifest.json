@@ -13,7 +13,13 @@
     "48": "tabify.png",
     "128": "tabify.png"
   },
-  "permissions": ["tabs", "chrome://favicon/", "storage"],
+  "permissions": [
+    "tabs",
+    "chrome://favicon/",
+    "storage",
+    "identity",
+    "identity.email"
+  ],
 
   "background": {
     "scripts": ["background.js"],

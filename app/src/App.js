@@ -8,6 +8,7 @@ import mockData from './utils/mock';
 const App = () => {
   const [currentData, setCurrentData] = React.useState([]);
   const [fulldata, setFullData] = React.useState([]);
+  const [email, setEmail] = useState(null);
 
   useEffect(() => {
     chrome.storage.local.get(['key'], function (result) {
@@ -16,6 +17,15 @@ const App = () => {
         setFullData(res);
         setData(res);
       }
+    });
+
+    chrome.identity.getAuthToken({ interactive: true }, function (token) {
+      chrome.identity.getProfileUserInfo(function (info) {
+        console.log(info.email);
+        if (info.email) {
+          setEmail(info.email);
+        }
+      });
     });
   }, []);
 
@@ -30,7 +40,12 @@ const App = () => {
   return (
     <div className='App'>
       <SearchBar fulldata={fulldata} setData={setData} />
-      <Home setData={setData} currentData={currentData} setGlobal={setGlobal} />
+      <Home
+        email={email}
+        setData={setData}
+        currentData={currentData}
+        setGlobal={setGlobal}
+      />
     </div>
   );
 };
